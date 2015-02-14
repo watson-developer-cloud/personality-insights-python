@@ -33,7 +33,7 @@ Give it a try! Click the button below to fork into IBM DevOps Services and deplo
   $ cf login -u <your user ID>
   ```
 
-5. Create the Personality Insights service in Bluemix
+5. Create the User Modeling service in Bluemix
 
   ```sh
   $ cf create-service user_modeling user_modeling_free_plan user-modeling-service
@@ -48,7 +48,7 @@ Give it a try! Click the button below to fork into IBM DevOps Services and deplo
   See the full [Getting Started][getting_started] documentation for more details, including code snippets and references.
 
 ## Running locally
-  The application uses [Python][https://www.python.org] and [pip][https://pip.pypa.io/en/latest/installing.html] so you will have to download and install them as part of the steps below.
+  The application uses [Python](https://www.python.org) and [pip](https://pip.pypa.io/en/latest/installing.html) so you will have to download and install them as part of the steps below.
 
 1. Copy the credentials from your `user-modeling-service` service in Bluemix to `app.js`, you can see the credentials using:
 
