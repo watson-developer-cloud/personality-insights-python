@@ -1,0 +1,13 @@
+---
+declared-services:
+  user-modeling-service:
+    type: user_modeling
+    plan: user_modeling_free_plan
+
+applications:
+- name: user-modeling-python
+  command: python server.py
+  path: .
+  memory: 512M
+  services:
+  - user-modeling-service
