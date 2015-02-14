@@ -80,7 +80,7 @@ Give it a try! Click the button below to fork into IBM DevOps Services and deplo
 3. Go to the project folder in a terminal and run:
   `pip install -r requirements.txt`
 4. Start the application
-  `python config_server.py`
+  `python server.py`
 5. Go to
   `http://localhost:8080`
 
