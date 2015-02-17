@@ -7,5 +7,5 @@ applications:
   - user-modeling-service
   declared-services:
     user-modeling-service:
-    label: user_modeling
-    plan: user_modeling_free_plan
+      label: user_modeling
+      plan: user_modeling_free_plan
