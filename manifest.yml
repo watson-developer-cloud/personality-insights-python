@@ -1,3 +1,7 @@
+declared-services:
+- user-modeling-service:
+    label: user_modeling
+    plan: user_modeling_free_plan
 applications:
 - name: user-modeling-python
   command: python server.py
@@ -5,7 +9,3 @@ applications:
   memory: 256M
   services:
   - user-modeling-service
-  declared-services:
-    user-modeling-service:
-      label: user_modeling
-      plan: user_modeling_free_plan
