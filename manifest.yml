@@ -1,5 +1,5 @@
 declared-services:
-- user-modeling-service:
+  user-modeling-service:
     label: user_modeling
     plan: user_modeling_free_plan
 applications:
