@@ -35,7 +35,7 @@ $(document).ready(function() {
    */
   $('.clear-btn').click(function(){
     $content.val('');
-    $content.focus();
+    $('.clear-btn').blur();
     updateWordsCount();
   });
 
@@ -57,7 +57,7 @@ $(document).ready(function() {
    * 3. Call the methods to display the results
    */
   $('.analysis-btn').click(function(){
-    $content.focus();
+    $('.analysis-btn').blur();
     $loading.show();
     $error.hide();
     $traits.hide();
@@ -136,7 +136,7 @@ $(document).ready(function() {
           .find('span').html(elem.id).end()
           .end()
           .find('.tvalue')
-            .find('span').html(elem.value === '' ?  '' : elem.value)
+            .find('span').html(elem.value === '' ?  '' : (elem.value + ' (± '+ elem.sampling_error+')'))
             .end()
           .end()
           .appendTo(table);
@@ -161,6 +161,7 @@ $(document).ready(function() {
     var paragraphs = [
       assembleTraits(data.tree.children[0]),
       assembleFacets(data.tree.children[0]),
+      assembleNeeds(data.tree.children[1]),
       assembleValues(data.tree.children[2])
     ];
     var div = $('.summary-div');
@@ -271,7 +272,8 @@ function showVizualization(theProfile) {
           arr.push({
             'id': t.name,
             'title': t.children ? true : false,
-            'value': (typeof (t.percentage) !== 'undefined') ? Math.floor(t.percentage * 100) + '%' : ''
+            'value': (typeof (t.percentage) !== 'undefined') ? Math.floor(t.percentage * 100) + '%' : '',
+            'sampling_error': (typeof (t.sampling_error) !== 'undefined') ? Math.floor(t.sampling_error * 100) + '%' : ''
           });
         }
         if (t.children && t.id !== 'sbh') {

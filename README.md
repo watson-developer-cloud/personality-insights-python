@@ -1,6 +1,10 @@
-# User Modeling Python Starter Application
+# Personality Insights Nodejs Starter Application
 
-  The IBM Watson [User Modeling][service_url] service uses linguistic analysis to extract cognitive and social characteristics from input text such as email, text messages, tweets, forum posts, and more. By deriving cognitive and social preferences, the service helps users to understand, connect to, and communicate with other people on a more personalized level.
+  The IBM Watson [Personality Insights][service_url] service uses linguistic analysis to extract cognitive and social characteristics from input text such as email, text messages, tweets, forum posts, and more. By deriving cognitive and social preferences, the service helps users to understand, connect to, and communicate with other people on a more personalized level.
+
+Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix.
+
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/personality-insights-python)
 
 ## Getting Started
 
@@ -13,12 +17,12 @@
 3. Edit the `manifest.yml` file and change the `<application-name>` to something unique.
   ```none
   applications:
-  - name: user-modeling-python
+  - name: personality-insights-python
     command: python server.py
     path: .
     memory: 256M
     services:
-    - user-modeling-service
+    - personality-insights-service
   ```
 
     The name you use will determinate your application url initially, e.g. `<application-name>.mybluemix.net`.
@@ -29,10 +33,10 @@
   $ cf login -u <your user ID>
   ```
 
-5. Create the User Modeling service in Bluemix
+5. Create the Personality Insights service in Bluemix
 
   ```sh
-  $ cf create-service user_modeling user_modeling_free_plan user-modeling-service
+  $ cf create-service personality_insights "IBM Watson Personality Insights Monthly Plan" personality-insights-service
   ```
 
 6. Push it live!
@@ -46,25 +50,25 @@
 ## Running locally
   The application uses [Python](https://www.python.org) and [pip](https://pip.pypa.io/en/latest/installing.html) so you will have to download and install them as part of the steps below.
 
-1. Copy the credentials from your `user-modeling-service` service in Bluemix to `app.js`, you can see the credentials using:
+1. Copy the credentials from your `personality-insights-service` service in Bluemix to `server.py`, you can see the credentials using:
 
   ```sh
   $ cf env <application-name>
   ```
-    Example output:
+  Example output:
   ```sh
   System-Provided:
   {
   "VCAP_SERVICES": {
-    "user_modeling": [{
+    "personality_insights": [{
         "credentials": {
           "url": "<url>",
           "password": "<password>",
           "username": "<username>"
         },
-      "label": "user_modeling",
-      "name": "user-modeling-service",
-      "plan": "user_modeling_free_plan"
+      "label": "personality_insights",
+      "name": "personality-insights-service",
+      "plan": "IBM Watson Personality Insights Monthly Plan"
    }]
   }
   }
@@ -78,7 +82,7 @@
 4. Start the application
   `python server.py`
 5. Go to
-  `http://localhost:8080`
+  `http://localhost:3000`
 
 
 ## Troubleshooting
@@ -100,7 +104,7 @@ To troubleshoot your Bluemix app the main useful source of information are the l
 ## Open Source @ IBM
   Find more open source projects on the [IBM Github Page](http://ibm.github.io/)
 
-[service_url]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/user-modeling.html
+[service_url]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/personality-insights.html
 [cloud_foundry]: https://github.com/cloudfoundry/cli
 [getting_started]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/getting_started/
 [sign_up]: https://apps.admin.ibmcloud.com/manage/trial/bluemix.html?cm_mmc=WatsonDeveloperCloud-_-LandingSiteGetStarted-_-x-_-CreateAnAccountOnBluemixCLI

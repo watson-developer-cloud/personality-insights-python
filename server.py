@@ -23,8 +23,8 @@ from mako.template import Template
 from mako.lookup import TemplateLookup
 
 
-class UserModelingService:
-    """Wrapper on the User Modeling service"""
+class PersonalityInsightsService:
+    """Wrapper on the Personality Insights service"""
 
     def __init__(self, vcapServices):
         """
@@ -40,41 +40,25 @@ class UserModelingService:
         if vcapServices is not None:
             print("Parsing VCAP_SERVICES")
             services = json.loads(vcapServices)
-            svcName = "user_modeling"
+            svcName = "personality_insights"
             if svcName in services:
-                print("User modeling service found!")
+                print("Personality Insights service found!")
                 svc = services[svcName][0]["credentials"]
                 self.url = svc["url"]
                 self.username = svc["username"]
                 self.password = svc["password"]
             else:
-                print("ERROR: The User Modeling service was not found")
-
-    # Builds the content object to send to User Modeling API from a
-    # single piece of text
-    def _formatPOSTData(self, text):
-        return {
-            'contentItems': [{
-                'userid': 'dummy',
-                'id': 'dummyUuid',
-                'sourceid': 'freetext',
-                'contenttype': 'text/plain',
-                'language': 'en',
-                'content': text
-            }]
-        }
+                print("ERROR: The Personality Insights service was not found")
 
     def getProfile(self, text):
         """Returns the profile by doing a POST to /v2/profile with text"""
 
         if self.url is None:
-            raise Exception("No User Modeling service is bound to this app")
-
-        data = self._formatPOSTData(text)
-        response = requests.post(self.url + "api/v2/profile",
+            raise Exception("No Personality Insights service is bound to this app")
+        response = requests.post(self.url + "/v2/profile",
                           auth=(self.username, self.password),
-                          headers = {"content-type": "application/json"},
-                          data=json.dumps(data)
+                          headers = {"content-type": "text/plain"},
+                          data=text
                           )
         try:
             return json.loads(response.text)
@@ -103,12 +87,13 @@ class DemoService(object):
 
     def GET(self):
         """Shows the default page with sample text content"""
+
         return lookup.get_template("index.html").render(content=self.defaultContent)
 
 
     def POST(self, text=None):
         """
-        Send 'text' to the User Modeling API
+        Send 'text' to the Personality Insights API
         and return the response.
         """
         try:
@@ -144,9 +129,9 @@ if __name__ == '__main__':
         }
     }
 
-    # Create the User Modeling Wrapper
-    userModeling = UserModelingService(os.getenv("VCAP_SERVICES"))
+    # Create the Personality Insights Wrapper
+    personalityInsights = PersonalityInsightsService(os.getenv("VCAP_SERVICES"))
 
     # Start the server
     print("Listening on %s:%d" % (HOST_NAME, PORT_NUMBER))
-    cherrypy.quickstart(DemoService(userModeling), "/", config=conf)
+    cherrypy.quickstart(DemoService(personalityInsights), "/", config=conf)

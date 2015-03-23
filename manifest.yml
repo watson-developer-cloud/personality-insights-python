@@ -1,11 +1,13 @@
+---
 declared-services:
-  user-modeling-service:
-    label: user_modeling
-    plan: user_modeling_free_plan
+  personality-insights-service:
+    label: personality_insights
+    plan: 'IBM Watson Personality Insights Monthly Plan'
+
 applications:
-- name: user-modeling-python
+- name: personality-insights-python
   command: python server.py
   path: .
   memory: 256M
   services:
-  - user-modeling-service
+  - personality-insights-service
