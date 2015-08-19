@@ -2,7 +2,7 @@
 declared-services:
   personality-insights-service:
     label: personality_insights
-    plan: 'IBM Watson Personality Insights Monthly Plan'
+    plan: standard
 
 applications:
 - name: personality-insights-python
