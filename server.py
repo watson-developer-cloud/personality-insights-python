@@ -78,7 +78,7 @@ class DemoService(object):
         self.service = service
         self.defaultContent = None
         try:
-            contentFile = open("mobidick.txt", "r")
+            contentFile = open("public/text/en.txt", "r")
             self.defaultContent = contentFile.read()
         except Exception as e:
             print "ERROR: couldn't read mobidick.txt: %s" % e
