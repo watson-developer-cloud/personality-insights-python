@@ -22,22 +22,31 @@ import json
 from mako.template import Template
 from mako.lookup import TemplateLookup
 
+print ('PersonalityInsightsService Is about to start ')
+print ('Goto "http://localhost:3000" to test')
+#print (self)
+#print (vCapServices)
 
 class PersonalityInsightsService:
     """Wrapper on the Personality Insights service"""
-
+	
     def __init__(self, vcapServices):
+	
         """
         Construct an instance. Fetches service parameters from VCAP_SERVICES
         runtime variable for Bluemix, or it defaults to local URLs.
         """
-
+        print (self)
+        print (vcapServices)
         # Local variables
-        self.url = "<url>"
-        self.username = "<username>"
-        self.password = "<password>"
-
+        self.url = "https://gateway.watsonplatform.net/personality-insights/api"
+        self.username = "177c78ed-5bdc-4537-9d92-bedaf71d160c"
+        self.password = "mUVjUfduk9Ui"
+        print ('In __init__')
         if vcapServices is not None:
+			#print(vcapServices)
+			#print(self)
+            print(vcapServices+self)			
             print("Parsing VCAP_SERVICES")
             services = json.loads(vcapServices)
             svcName = "personality_insights"
@@ -52,7 +61,9 @@ class PersonalityInsightsService:
 
     def getProfile(self, text):
         """Returns the profile by doing a POST to /v2/profile with text"""
-
+        print('in get profile')
+        print(self)
+        #print(text)
         if self.url is None:
             raise Exception("No Personality Insights service is bound to this app")
         response = requests.post(self.url + "/v2/profile",
@@ -81,7 +92,7 @@ class DemoService(object):
             contentFile = open("public/text/en.txt", "r")
             self.defaultContent = contentFile.read()
         except Exception as e:
-            print "ERROR: couldn't read mobidick.txt: %s" % e
+            print ("ERROR: couldn't read mobidick.txt: %s" % e)
         finally:
             contentFile.close()
 
@@ -100,7 +111,7 @@ class DemoService(object):
             profileJson = self.service.getProfile(text)
             return json.dumps(profileJson)
         except Exception as e:
-            print "ERROR: %s" % e
+            print ("ERROR: %s" % e)
             return str(e)
 
 

@@ -1,13 +1,13 @@
 ---
 declared-services:
-  personality-insights-service:
+  Personality-Insights-p6:
     label: personality_insights
     plan: standard
 
 applications:
-- name: personality-insights-python
+- name: watson-phani-insights-python
   command: python server.py
   path: .
   memory: 256M
   services:
-  - personality-insights-service
+  - Personality-Insights-p6
