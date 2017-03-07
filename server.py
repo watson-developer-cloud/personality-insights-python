@@ -108,7 +108,7 @@ if __name__ == '__main__':
     lookup = TemplateLookup(directories=["templates"])
 
     # Get host/port from the Bluemix environment, or default to local
-    HOST_NAME = os.getenv("VCAP_APP_HOST", "127.0.0.1")
+    HOST_NAME = os.getenv("VCAP_APP_HOST", "0.0.0.0")
     PORT_NUMBER = int(os.getenv("VCAP_APP_PORT", "3000"))
     cherrypy.config.update({
         "server.socket_host": HOST_NAME,
