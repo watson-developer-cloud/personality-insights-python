@@ -13,6 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+ 
+// Edited and Updated - May 15, 2017 by Eric Newman @IBM
+
+
 
 'use strict';
 
@@ -28,13 +32,18 @@ $(document).ready(function() {
     $error = $('.error'),
     $errorMsg = $('.errorMsg'),
     $traits = $('.traits'),
-    $results = $('.results');
-
+    $results = $('.results'),
+    $firstName = $('#firstNameID'),
+    $lastName = $('#lastNameID'),
+    $twitterName = $('#twitterID');
   /**
    * Clear the "textArea"
    */
   $('.clear-btn').click(function(){
     $content.val('');
+    $firstName.val('');
+    $lastName.val('');
+    $twitterName.val('');
     $('.clear-btn').blur();
     updateWordsCount();
   });
@@ -51,6 +60,8 @@ $(document).ready(function() {
     setTimeout(updateWordsCount, 100);
   });
 
+  $('#');
+  
   /**
    * 1. Create the request
    * 2. Call the API
@@ -62,26 +73,29 @@ $(document).ready(function() {
     $error.hide();
     $traits.hide();
     $results.hide();
-
+    
+    var requestData = {
+        'text': $('.content').val(),
+        'twittername': $('#twitterID').val(),
+        'fullname' : $('#devSelect').val(),
+    };
+    
     $.ajax({
       type: 'POST',
-      data: {
-        text: $content.val()
-      },
+      data: requestData,
       url: '/',
       dataType: 'json',
       success: function(response) {
         $loading.hide();
-
         if (response.error) {
           showError(response.error);
+          showTraits(response);
         } else {
           $results.show();
           showTraits(response);
           showTextSummary(response);
           showVizualization(response);
         }
-
       },
       error: function(xhr) {
         $loading.hide();

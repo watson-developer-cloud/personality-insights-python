@@ -1,3 +1,5 @@
-cherrypy
-mako
-requests
+CherryPy==8.9.1
+ibm-db==2.0.5.4
+Mako==1.0.6
+requests==2.13.0
+twitter==1.17.1
