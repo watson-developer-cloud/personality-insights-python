@@ -847,6 +847,7 @@ pre code {
 }
 .col-xs-1 {
   width: 8.333333333333332%;
+  height: 100%;
 }
 .col-xs-pull-12 {
   right: 100%;
@@ -5905,6 +5906,10 @@ h1 {
 }
 h2 {
   color: #00b2ef;
+  font-weight: 200;
+}
+h3 {
+   color: #00b2ef;
   font-weight: 200;
 }
 table.table,
