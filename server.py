@@ -57,7 +57,7 @@ class PersonalityInsightsService:
             raise Exception("No Personality Insights service is bound to this app")
         response = requests.post(self.url + "/v2/profile",
                           auth=(self.username, self.password),
-                          headers = {"content-type": "text/plain"},
+                          headers = {"content-type": "text/plain" , "Accept": "application/json"},
                           data=text
                           )
         try:
