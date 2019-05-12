@@ -21,6 +21,7 @@ import requests
 import json
 from mako.template import Template
 from mako.lookup import TemplateLookup
+from ibm_watson import PersonalityInsightsV3
 
 
 class PersonalityInsightsService:
@@ -51,19 +52,19 @@ class PersonalityInsightsService:
                 print("ERROR: The Personality Insights service was not found")
 
     def getProfile(self, text):
-        """Returns the profile by doing a POST to /v2/profile with text"""
+        """Returns the profile by use of the IBM Watson SDK"""
 
         if self.url is None:
             raise Exception("No Personality Insights service is bound to this app")
-        response = requests.post(self.url + "/v2/profile",
-                          auth=(self.username, self.password),
-                          headers = {"content-type": "text/plain" , "Accept": "application/json"},
-                          data=text
-                          )
-        try:
-            return json.loads(response.text)
-        except:
-            raise Exception("Error processing the request, HTTP: %d" % response.status_code)
+
+        personality_insights = PersonalityInsightsV3(
+            version='2018-01-11',
+            username=self.username,
+            password=self.password,
+            url=self.url
+        )
+        response = personality_insights.profile(content=text, accept="application/json", content_type="text/plain", content_language="en", accept_language="en", raw_scores=True, consumption_preferences=True)
+        return response.get_result()
 
 
 class DemoService(object):
